@@ -4,6 +4,7 @@
 #include <linux/sched.h>
 #include <linux/device.h> /* for dev_warn */
 #include <linux/selection.h>
+#include <linux/tty.h>
 
 #include "speakup.h"
 
@@ -127,7 +128,12 @@ int speakup_paste_selection(struct tty_struct *tty)
 {
 	struct vc_data *vc = (struct vc_data *) tty->driver_data;
 	int pasted = 0, count;
+	struct tty_ldisc *ld;
 	DECLARE_WAITQUEUE(wait, current);
+
+	ld = tty_ldisc_ref_wait(tty);
+
+	/* FIXME: this is completely unsafe */
 	add_wait_queue(&vc->paste_wait, &wait);
 	while (sel_buffer && sel_buffer_lth > pasted) {
 		set_current_state(TASK_INTERRUPTIBLE);
@@ -140,12 +146,13 @@ int speakup_paste_selection(struct tty_struct *tty)
 		}
 		count = sel_buffer_lth - pasted;
 		count = min_t(int, count, tty->receive_room);
-		tty->ldisc->ops->receive_buf(tty, sel_buffer + pasted,
-			NULL, count);
+		ld->ops->receive_buf(tty, sel_buffer + pasted, NULL, count);
 		pasted += count;
 	}
 	remove_wait_queue(&vc->paste_wait, &wait);
 	current->state = TASK_RUNNING;
+
+	tty_ldisc_deref(ld);
 	return 0;
 }
 
