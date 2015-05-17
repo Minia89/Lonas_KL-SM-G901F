@@ -10,7 +10,7 @@ echo "#################### Eliminando Restos ####################"
 
 # Rutas
 export ROOTFS_PATH="/home/lonas/Kernel_Lonas/Lonas_KL-SM-G901F/ramdisk"
-export TOOLCHAIN="/home/lonas/Kernel_Lonas/toolchains/arm-eabi-4.8/bin/arm-eabi-"
+export TOOLCHAIN="/home/lonas/Kernel_Lonas/toolchains/arm-cortex_a15-linux-gnueabihf-linaro_4.9.3-2015.03/bin/arm-cortex_a15-linux-gnueabihf-"
 export TOOLBASE="/home/lonas/Kernel_Lonas/Lonas_KL-SM-G901F/buildtools"
 
 echo "#################### Preparando Entorno ####################"

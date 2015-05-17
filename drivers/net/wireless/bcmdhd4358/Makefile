@@ -148,8 +148,8 @@ endif
 # DTIM listen interval in suspend mode(0 means follow AP's DTIM period)
 DHDCFLAGS += -DCUSTOM_SUSPEND_BCN_LI_DTIM=0
 
-# Ioctl timeout 5000ms
-DHDCFLAGS += -DIOCTL_RESP_TIMEOUT=5000
+# Ioctl timeout 10000ms
+DHDCFLAGS += -DIOCTL_RESP_TIMEOUT=10000
 
 # Priority mismatch fix with kernel stack
 DHDCFLAGS += -DPKTPRIO_OVERRIDE
@@ -258,6 +258,7 @@ endif
 ifeq ($(CONFIG_BCM4358),y)
   DHDCFLAGS += -DENABLE_INSMOD_NO_FW_LOAD
   DHDCFLAGS += -DUSE_LATE_INITCALL_SYNC
+  DHDCFLAGS += -fno-pic
   DRIVER_TYPE = y
 endif
 ifeq ($(BUS_IFACE_SDIO),y)

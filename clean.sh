@@ -4,7 +4,7 @@
 # Javilonas <admin@lonasdigital.com>
 #
 
-TOOLCHAIN="/home/lonas/Kernel_Lonas/toolchains/arm-eabi-4.8/bin/arm-eabi-"
+TOOLCHAIN="/home/lonas/Kernel_Lonas/toolchains/arm-cortex_a15-linux-gnueabihf-linaro_4.9.3-2015.03/bin/arm-cortex_a15-linux-gnueabihf-"
 DIR="/home/lonas/Kernel_Lonas/Lonas_KL-SM-G901F"
 export KERNELDIR=`readlink -f .`
 
